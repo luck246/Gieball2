@@ -1,10 +1,10 @@
 import streamlit as st
 import time
 
-# 1. ตั้งค่าหน้าแอปแบบ Professional
+# 1. ตั้งค่าหน้าแอปแบบ Professional (เหมือนเดิม)
 st.set_page_config(page_title="GIE BALL PRO - วิเคราะห์บอลโลก", page_icon="⚽", layout="wide")
 
-# 2. ปรับแต่ง CSS ให้ดูหรูหรา (ดำ-ทอง)
+# 2. ปรับแต่ง CSS (เหมือนเดิม)
 st.markdown("""
     <style>
     .stApp { background-color: #0b101a; color: #ffffff; }
@@ -12,14 +12,16 @@ st.markdown("""
     .match-card { background-color: #161b28; padding: 15px; border-radius: 12px; border: 1px solid #2d333b; margin-bottom: 10px; }
     .stButton>button { width: 100%; border-radius: 20px; background-color: #ffd700; color: black; font-weight: bold; border: none; }
     .stButton>button:hover { background-color: #ffea00; color: black; }
+    /* ส่วนเพิ่ม: กล่องนับจำนวนคนดู */
+    .counter-container { text-align: center; background-color: #161b28; padding: 15px; border-radius: 10px; border: 1px solid #ffd700; margin-top: 40px; }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. Header แฟรนไชส์เซียนกี้
+# 3. Header (เหมือนเดิม)
 st.markdown("<h1 style='text-align: center; color: #ffd700;'>⚽ GIE BALL PRO : DAILY ANALYSIS</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #8b949e;'>วิเคราะห์แม่นยำ 1,000% โดย เซียนกี้ & AI มิ้น | อัปเดต 1 มี.ค. 2026</p>", unsafe_allow_html=True)
 
-# ฟังก์ชันจำลองการคำนวณ
+# ฟังก์ชัน AI Predict (เหมือนเดิม)
 def run_ai_logic(h_name, a_name, h_p, d_p, a_p, tip, score):
     with st.spinner(f'AI มิ้น กำลังประมวลผลสถิติ {h_name} vs {a_name}...'):
         time.sleep(1.2)
@@ -33,13 +35,11 @@ def run_ai_logic(h_name, a_name, h_p, d_p, a_p, tip, score):
 # --- 🏆 PREMIER LEAGUE ---
 st.markdown("<div class='league-header'>🏴󠁧󠁢󠁥󠁮󠁧󠁿 PREMIER LEAGUE (อังกฤษ)</div>", unsafe_allow_html=True)
 
-# คู่ 1: อาร์เซน่อล vs เชลซี
 with st.container():
     st.write("🕒 **23:30 น. | อาร์เซน่อล vs เชลซี**")
     if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="eng1"):
         run_ai_logic("อาร์เซน่อล", "เชลซี", 58, 22, 20, "วาง 'อาร์เซน่อล' ในบ้านไว้ใจได้ ปืนใหญ่กำลังลุ้นแชมป์ไม่ปล่อยแต้มแน่นอน", "2-1 หรือ 3-1")
 
-# คู่ 2: ลีดส์ vs แมนฯ ซิตี้
 with st.container():
     st.write("🕒 **00:30 น. | ลีดส์ ยูไนเต็ด vs แมนฯ ซิตี้**")
     if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="eng2"):
@@ -48,13 +48,11 @@ with st.container():
 # --- 🏆 SERIE A ---
 st.markdown("<div class='league-header'>🇮🇹 SERIE A (อิตาลี)</div>", unsafe_allow_html=True)
 
-# คู่ 3: โตริโน่ vs ลาซิโอ
 with st.container():
     st.write("🕒 **00:00 น. | โตริโน่ vs ลาซิโอ**")
     if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="ita1"):
         run_ai_logic("โตริโน่", "ลาซิโอ", 35, 35, 30, "คู่นี้สูสีมาก ออกหน้า 'เสมอ' สูง หรือวางโตริโน่กินหน้าเสื่อ", "1-1")
 
-# คู่ 4: โรม่า vs ยูเวนตุส
 with st.container():
     st.write("🕒 **02:45 น. | โรม่า vs ยูเวนตุส**")
     if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="ita2"):
@@ -63,13 +61,11 @@ with st.container():
 # --- 🏆 LA LIGA ---
 st.markdown("<div class='league-header'>🇪🇸 LA LIGA (สเปน)</div>", unsafe_allow_html=True)
 
-# คู่ 5: เรอัล เบติส vs เซบีญ่า
 with st.container():
     st.write("🕒 **00:30 น. | เรอัล เบติส vs เซบีญ่า**")
     if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="spa1"):
         run_ai_logic("เบติส", "เซบีญ่า", 45, 25, 30, "ศึกดาร์บี้แมตช์! เบติสฟอร์มดีกว่าเล็กน้อย น่าจะเฉือนเอาชนะได้", "2-1")
 
-# คู่ 6: จีโรน่า vs เซลต้า บีโก้
 with st.container():
     st.write("🕒 **03:00 น. | จีโรน่า vs เซลต้า บีโก้**")
     if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="spa2"):
@@ -78,11 +74,20 @@ with st.container():
 # --- 🏆 BUNDESLIGA ---
 st.markdown("<div class='league-header'>🇩🇪 BUNDESLIGA (เยอรมัน)</div>", unsafe_allow_html=True)
 
-# คู่ 7: ฮัมบูร์ก vs ไลป์ซิก
 with st.container():
     st.write("🕒 **01:30 น. | ฮัมบูร์ก vs แอร์เบ ไลป์ซิก**")
     if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="ger1"):
         run_ai_logic("ฮัมบูร์ก", "ไลป์ซิก", 20, 25, 55, "ไลป์ซิกเหนือกว่าเยอะ สวนกลับรวดเร็ว ฮัมบูร์กต้านไม่อยู่", "1-3")
+
+st.write("---")
+
+# 🚀 ส่วนที่เพิ่มใหม่: ตัวนับจำนวนคนดู (Visitor Counter)
+st.markdown("<div class='counter-container'>", unsafe_allow_html=True)
+st.write("📊 สถิติผู้ใช้งานแอปทั้งหมด (Visitors)")
+# มิ้นใช้ระบบนับจำนวนคนดูผ่าน Hits.seeyoufarm ให้กี้อัตโนมัติครับ
+st.markdown(f'<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgieball2.streamlit.app&count_bg=%23FFD700&title_bg=%23555555&icon=skype.svg&icon_color=%23E7E7E7&title=Visitors&edge_flat=false"/>', unsafe_allow_html=True)
+st.write("วันนี้มีเซียนบอลสนใจทีเด็ดกี้เท่าไหร่แล้ว ดูได้ที่นี่เลย!")
+st.markdown("</div>", unsafe_allow_html=True)
 
 st.write("---")
 st.markdown("<p style='text-align: center; color: #4a5568;'>สร้างสรรค์เพื่ออนาคตลูกสาว โดย เซียนกี้ & มิ้น</p>", unsafe_allow_html=True)
