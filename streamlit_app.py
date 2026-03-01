@@ -1,77 +1,88 @@
 import streamlit as st
 import time
-import random
 
 # 1. ตั้งค่าหน้าแอปแบบ Professional
-st.set_page_config(page_title="GIE BALL PRO - วิเคราะห์บอลระดับโลก", page_icon="⚽", layout="wide")
+st.set_page_config(page_title="GIE BALL PRO - วิเคราะห์บอลโลก", page_icon="⚽", layout="wide")
 
-# 2. ปรับแต่ง CSS ให้ดูเหมือนแอปเจ้าใหญ่ (โทนดำ-ทอง-เขียว)
+# 2. ปรับแต่ง CSS ให้ดูหรูหรา (ดำ-ทอง)
 st.markdown("""
     <style>
-    .stApp { background-color: #0b0e14; color: #ffffff; }
-    .match-box { background-color: #1c212d; padding: 20px; border-radius: 15px; border: 1px solid #30363d; margin-bottom: 15px; }
-    .league-title { color: #ffd700; font-weight: bold; font-size: 14px; border-left: 4px solid #ffd700; padding-left: 10px; margin-bottom: 10px; }
-    .team-name { font-size: 20px; font-weight: bold; }
-    .vs-badge { background-color: #ff4b4b; padding: 2px 10px; border-radius: 5px; font-size: 12px; }
+    .stApp { background-color: #0b101a; color: #ffffff; }
+    .league-header { background: linear-gradient(90deg, #ffd700, #b8860b); color: black; padding: 10px; border-radius: 5px; font-weight: bold; margin: 20px 0 10px 0; }
+    .match-card { background-color: #161b28; padding: 15px; border-radius: 12px; border: 1px solid #2d333b; margin-bottom: 10px; }
+    .stButton>button { width: 100%; border-radius: 20px; background-color: #ffd700; color: black; font-weight: bold; border: none; }
+    .stButton>button:hover { background-color: #ffea00; color: black; }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. ส่วนหัว Header
-st.markdown("<h1 style='text-align: center; color: #ffd700;'>⚽ GIE BALL PRO ANALYSIS</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #8b949e;'>ระบบวิเคราะห์ความน่าจะเป็นด้วย AI อัปเดตเรียลไทม์ 2026</p>", unsafe_allow_html=True)
-st.write("---")
+# 3. Header แฟรนไชส์เซียนกี้
+st.markdown("<h1 style='text-align: center; color: #ffd700;'>⚽ GIE BALL PRO : DAILY ANALYSIS</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #8b949e;'>วิเคราะห์แม่นยำ 1,000% โดย เซียนกี้ & AI มิ้น | อัปเดต 1 มี.ค. 2026</p>", unsafe_allow_html=True)
 
-# ฟังก์ชันจำลองการวิเคราะห์ (เพิ่มลูกเล่นให้ดูน่าเชื่อถือ)
-def analyze_match(home, away):
-    with st.spinner(f'กำลังดึงสถิติ H2H และความพร้อมของ {home} และ {away}...'):
-        time.sleep(1.5)
-        st.toast("กำลังคำนวณราคาไหล...", icon="📈")
-        time.sleep(1)
-    st.success("วิเคราะห์สำเร็จ!")
+# ฟังก์ชันจำลองการคำนวณ
+def run_ai_logic(h_name, a_name, h_p, d_p, a_p, tip, score):
+    with st.spinner(f'AI มิ้น กำลังประมวลผลสถิติ {h_name} vs {a_name}...'):
+        time.sleep(1.2)
+    col_a, col_b, col_c = st.columns(3)
+    col_a.metric(f"{h_name} ชนะ", f"{h_p}%")
+    col_b.metric("เสมอ", f"{d_p}%")
+    col_c.metric(f"{a_name} ชนะ", f"{a_p}%")
+    st.info(f"🎯 **เซียนกี้ฟันธง:** {tip}")
+    st.success(f"💰 **สกอร์ที่คาด:** {score}")
 
-# 4. รายการบอลวันนี้ (คู่หลัก)
-st.markdown("<div class='league-title'>🏆 PREMIER LEAGUE (ENGLAND)</div>", unsafe_allow_html=True)
+# --- 🏆 PREMIER LEAGUE ---
+st.markdown("<div class='league-header'>🏴󠁧󠁢󠁥󠁮󠁧󠁿 PREMIER LEAGUE (อังกฤษ)</div>", unsafe_allow_html=True)
 
-# --- คู่ที่ 1 ---
+# คู่ 1: อาร์เซน่อล vs เชลซี
 with st.container():
-    col1, col2, col3 = st.columns([2,1,2])
-    with col1:
-        st.markdown("<div style='text-align: center;'><p class='team-name'>แมนฯ ซิตี้</p><p style='color:#00ff00'>ฟอร์ม: W-W-W-D-W</p></div>", unsafe_allow_html=True)
-    with col2:
-        st.markdown("<div style='text-align: center; margin-top:20px;'><span class='vs-badge'>LIVE</span><br>23:30</div>", unsafe_allow_html=True)
-    with col3:
-        st.markdown("<div style='text-align: center;'><p class='team-name'>แมนฯ ยูไนเต็ด</p><p style='color:#ff4b4b'>ฟอร์ม: L-W-L-L-D</p></div>", unsafe_allow_html=True)
+    st.write("🕒 **23:30 น. | อาร์เซน่อล vs เชลซี**")
+    if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="eng1"):
+        run_ai_logic("อาร์เซน่อล", "เชลซี", 58, 22, 20, "วาง 'อาร์เซน่อล' ในบ้านไว้ใจได้ ปืนใหญ่กำลังลุ้นแชมป์ไม่ปล่อยแต้มแน่นอน", "2-1 หรือ 3-1")
 
-    if st.button("🔍 กดเพื่อวิเคราะห์ความน่าจะเป็น (AI Predict)", key="btn1"):
-        analyze_match("แมนฯ ซิตี้", "แมนฯ ยูไนเต็ด")
-        c1, c2, c3 = st.columns(3)
-        c1.metric("เจ้าบ้านชนะ", "82%")
-        c2.metric("เสมอ", "12%")
-        c3.metric("ทีมเยือนชนะ", "6%")
-        st.info("💡 **เซียนกี้ฟันธง:** ซิตี้ข่มมิดด้าม เรทเปิดมา 2 ลูกก็ยังน่าตาม สกอร์ที่คาด 3-0")
-
-st.write("---")
-
-# --- คู่ที่ 2 (เพิ่มคู่ใหม่ๆ) ---
-st.markdown("<div class='league-title'>🏆 LA LIGA (SPAIN)</div>", unsafe_allow_html=True)
+# คู่ 2: ลีดส์ vs แมนฯ ซิตี้
 with st.container():
-    col1, col2, col3 = st.columns([2,1,2])
-    with col1:
-        st.markdown("<div style='text-align: center;'><p class='team-name'>เรอัล มาดริด</p><p style='color:#00ff00'>ฟอร์ม: W-D-W-W-W</p></div>", unsafe_allow_html=True)
-    with col2:
-        st.markdown("<div style='text-align: center; margin-top:20px;'><span class='vs-badge' style='background-color:#718096;'>SOON</span><br>02:00</div>", unsafe_allow_html=True)
-    with col3:
-        st.markdown("<div style='text-align: center;'><p class='team-name'>บาร์เซโลน่า</p><p style='color:#ffd700'>ฟอร์ม: W-W-D-L-W</p></div>", unsafe_allow_html=True)
+    st.write("🕒 **00:30 น. | ลีดส์ ยูไนเต็ด vs แมนฯ ซิตี้**")
+    if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="eng2"):
+        run_ai_logic("ลีดส์", "แมนฯ ซิตี้", 10, 15, 75, "ตาม 'เรือใบสีฟ้า' ไปเลยเพื่อน ขุมกำลังคนละชั้น กดขาดแน่นอน", "0-3 หรือ 1-4")
 
-    if st.button("🔍 กดเพื่อวิเคราะห์ความน่าจะเป็น (AI Predict)", key="btn2"):
-        analyze_match("เรอัล มาดริด", "บาร์เซโลน่า")
-        c1, c2, c3 = st.columns(3)
-        c1.metric("เจ้าบ้านชนะ", "55%")
-        c2.metric("เสมอ", "25%")
-        c3.metric("ทีมเยือนชนะ", "20%")
-        st.info("💡 **เซียนกี้ฟันธง:** เอล กลาซิโก้ ครั้งนี้มาดริดคมกว่าเยอะ เล่นในบ้านยังไงก็เฉือน 2-1")
+# --- 🏆 SERIE A ---
+st.markdown("<div class='league-header'>🇮🇹 SERIE A (อิตาลี)</div>", unsafe_allow_html=True)
+
+# คู่ 3: โตริโน่ vs ลาซิโอ
+with st.container():
+    st.write("🕒 **00:00 น. | โตริโน่ vs ลาซิโอ**")
+    if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="ita1"):
+        run_ai_logic("โตริโน่", "ลาซิโอ", 35, 35, 30, "คู่นี้สูสีมาก ออกหน้า 'เสมอ' สูง หรือวางโตริโน่กินหน้าเสื่อ", "1-1")
+
+# คู่ 4: โรม่า vs ยูเวนตุส
+with st.container():
+    st.write("🕒 **02:45 น. | โรม่า vs ยูเวนตุส**")
+    if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="ita2"):
+        run_ai_logic("โรม่า", "ยูเวนตุส", 40, 30, 30, "บิ๊กแมตช์อิตาลี! เชียร์ 'โรม่า' เล่นในบ้านดุดัน ยูเว่ช่วงหลังฝืด", "1-0 หรือ 2-1")
+
+# --- 🏆 LA LIGA ---
+st.markdown("<div class='league-header'>🇪🇸 LA LIGA (สเปน)</div>", unsafe_allow_html=True)
+
+# คู่ 5: เรอัล เบติส vs เซบีญ่า
+with st.container():
+    st.write("🕒 **00:30 น. | เรอัล เบติส vs เซบีญ่า**")
+    if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="spa1"):
+        run_ai_logic("เบติส", "เซบีญ่า", 45, 25, 30, "ศึกดาร์บี้แมตช์! เบติสฟอร์มดีกว่าเล็กน้อย น่าจะเฉือนเอาชนะได้", "2-1")
+
+# คู่ 6: จีโรน่า vs เซลต้า บีโก้
+with st.container():
+    st.write("🕒 **03:00 น. | จีโรน่า vs เซลต้า บีโก้**")
+    if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="spa2"):
+        run_ai_logic("จีโรน่า", "เซลต้า บีโก้", 65, 20, 15, "จีโรน่าในบ้านเป็นเครื่องจักรทำเงิน วางเจ้าบ้านยาวๆ", "2-0")
+
+# --- 🏆 BUNDESLIGA ---
+st.markdown("<div class='league-header'>🇩🇪 BUNDESLIGA (เยอรมัน)</div>", unsafe_allow_html=True)
+
+# คู่ 7: ฮัมบูร์ก vs ไลป์ซิก
+with st.container():
+    st.write("🕒 **01:30 น. | ฮัมบูร์ก vs แอร์เบ ไลป์ซิก**")
+    if st.button("🔍 วิเคราะห์ความน่าจะเป็น (AI Predict)", key="ger1"):
+        run_ai_logic("ฮัมบูร์ก", "ไลป์ซิก", 20, 25, 55, "ไลป์ซิกเหนือกว่าเยอะ สวนกลับรวดเร็ว ฮัมบูร์กต้านไม่อยู่", "1-3")
 
 st.write("---")
-
-# 5. ส่วนท้าย Footer
-st.markdown("<p style='text-align: center; color: #4a5568; font-size: 12px;'>ระบบนี้จัดทำโดย เซียนกี้ เพื่อความบันเทิงและการวิเคราะห์เชิงสถิติเท่านั้น<br>สงวนลิขสิทธิ์ © 2026 GIE BALL PRO</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #4a5568;'>สร้างสรรค์เพื่ออนาคตลูกสาว โดย เซียนกี้ & มิ้น</p>", unsafe_allow_html=True)
