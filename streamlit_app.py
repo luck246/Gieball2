@@ -81,13 +81,12 @@ with st.container():
 
 st.write("---")
 
-# 🚀 ส่วนที่เพิ่มใหม่: ตัวนับจำนวนคนดู (Visitor Counter)
+# 🚀 ส่วนที่เพิ่มใหม่: ตัวนับจำนวนคนดู (เวอร์ชันแก้บั๊ก)
 st.markdown("<div class='counter-container'>", unsafe_allow_html=True)
 st.write("📊 สถิติผู้ใช้งานแอปทั้งหมด (Visitors)")
-# มิ้นใช้ระบบนับจำนวนคนดูผ่าน Hits.seeyoufarm ให้กี้อัตโนมัติครับ
-st.markdown(f'<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgieball2.streamlit.app&count_bg=%23FFD700&title_bg=%23555555&icon=skype.svg&icon_color=%23E7E7E7&title=Visitors&edge_flat=false"/>', unsafe_allow_html=True)
-st.write("วันนี้มีเซียนบอลสนใจทีเด็ดกี้เท่าไหร่แล้ว ดูได้ที่นี่เลย!")
-st.markdown("</div>", unsafe_allow_html=True)
 
-st.write("---")
-st.markdown("<p style='text-align: center; color: #4a5568;'>สร้างสรรค์เพื่ออนาคตลูกสาว โดย เซียนกี้ & มิ้น</p>", unsafe_allow_html=True)
+# มิ้นแก้ลิงก์ให้ตรงกับชื่อโปรเจกต์ Gieball2 ของกี้แล้วครับ
+st.markdown(f'<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgieball2.streamlit.app&count_bg=%23FFD700&title_bg=%23555555&icon=skype.svg&icon_color=%23E7E7E7&title=Visitors&edge_flat=false"/>', unsafe_allow_html=True)
+
+st.write("ตัวเลขจะเพิ่มขึ้นทุกครั้งที่มีคนกดเข้าเว็บกี้ครับ!")
+st.markdown("</div>", unsafe_allow_html=True)
